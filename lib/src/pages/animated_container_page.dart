@@ -45,10 +45,11 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
       _width = random.nextInt(300).toDouble();
     _height = random.nextInt(300).toDouble();
     _color = Color.fromRGBO(
-      random.nextInt(255), 
-      random.nextInt(255),
-      random.nextInt(255),
-      1);
+      random.nextInt(255), // Red
+      random.nextInt(255), // Green
+      random.nextInt(255), // Blue
+      1 // Opacity
+      );
 
       _borderRadius = BorderRadius.circular(random.nextInt(100).toDouble());
     });
