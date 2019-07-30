@@ -43,17 +43,32 @@ class _ListViewPageState extends State<ListViewPage> {
   }
 
   Widget _crearLista(){
-    return ListView.builder(
-      controller: _scrollController,                  // Esto nos va a permitir mover de posicion
-      itemCount: _listaNumeros.length,                // Cantidad de items de la lista
-      itemBuilder: (BuildContext context, int index){
-        final imagen = _listaNumeros[index];
-        return FadeInImage(
-          image: NetworkImage('https://picsum.photos/id/$imagen/500/400'),
-          placeholder: AssetImage('assets/jar-loading.gif'),
-        );
-      },
+    return RefreshIndicator(
+        onRefresh: obtenerPagina1,
+        child: ListView.builder(
+        controller: _scrollController,                  // Esto nos va a permitir mover de posicion
+        itemCount: _listaNumeros.length,                // Cantidad de items de la lista
+        itemBuilder: (BuildContext context, int index){
+          final imagen = _listaNumeros[index];
+          return FadeInImage(
+            image: NetworkImage('https://picsum.photos/id/$imagen/500/400'),
+            placeholder: AssetImage('assets/jar-loading.gif'),
+          );
+        },
+      ),
     );
+  }
+
+  // Con este metodo refrescamos la pagina y de paso mostramos las siguientes
+  Future<Null> obtenerPagina1()async{
+    final duration = new Duration(seconds: 2);  // Añadir 2 segundos de Duracion de carga
+     new Timer(duration, (){
+      _listaNumeros.clear();    // Limpia la pagina de las imagenes que tenemos
+      _ultimoItem++;            // Guarda la posicion de la ultima imagen
+      _agregar10();             // agregamos 10 nuevas imagenes
+    });
+
+    return Future.delayed(duration); // Añadimos un pequeño delay para esperar que cargue 
   }
 
   // Agregar 10 items a la lista
