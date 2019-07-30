@@ -24,12 +24,17 @@
         {
             "ruta" : "inputs",
             "icon" : "input",
-            "texto": "Inputs"
+            "texto": "Inputs - Name - Email - Password"
         },
         {
             "ruta" : "slider",
             "icon" : "tune",
-            "texto": "Sliders"
+            "texto": "Sliders - CheckBox"
+        },
+        {
+            "ruta" : "list",
+            "icon" : "list",
+            "texto": "List - ListBuilder"
         }
     ]
 }
