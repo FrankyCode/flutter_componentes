@@ -7,6 +7,7 @@ class SliderPage extends StatefulWidget {
 
 class _SliderPageState extends State<SliderPage> {
   double _valorSlider = 100.0;
+  bool _onCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,8 @@ class _SliderPageState extends State<SliderPage> {
         child: Column(
           children: <Widget>[
             _crearSlide(),
+            _crearCheckBox(),
+            _crearSwitch(),
             Expanded(child: _crearImagen()),
           ],
         ),
@@ -33,7 +36,7 @@ class _SliderPageState extends State<SliderPage> {
       value: _valorSlider,            // valor inicial por el que comienza el SLide
       min: 10.0,                      // valor minimo del SLide
       max: 400.0,                     // valor maximo del Slide
-      onChanged: (valor) {
+      onChanged:(_onCheck) ? null : (valor) {
         setState(() {
           _valorSlider = valor;
           print(valor);
@@ -41,6 +44,7 @@ class _SliderPageState extends State<SliderPage> {
       },
     );
   }
+
 
   Widget _crearImagen() {
     return Image(
@@ -50,4 +54,30 @@ class _SliderPageState extends State<SliderPage> {
       fit: BoxFit.contain,
     );
   }
+
+  Widget _crearCheckBox(){
+    return CheckboxListTile(            //Destacar que el Checkbox y CheckboxListTile son casi =
+      title: Text('Bloquear Slider'),   // Esta es la diferencia del ListTile
+      value: _onCheck,
+      onChanged: (valor){
+          setState(() {
+            _onCheck = valor;
+          });
+      },
+    );
+  }
+
+  Widget _crearSwitch(){
+      return SwitchListTile(
+        title: Text('Bloquear Slider'),
+        value: _onCheck,
+        onChanged: (valor){
+          setState(() {
+           _onCheck = valor; 
+          });
+        },
+      );
+  }
+
 }
+
